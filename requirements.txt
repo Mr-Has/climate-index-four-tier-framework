@@ -1,0 +1,9 @@
+# Tested with Python 3.12 on Windows. Use a separate virtual environment.
+numpy==2.2.5
+pandas==2.2.3
+scipy==1.15.2
+statsmodels==0.14.6
+matplotlib==3.10.1
+openpyxl==3.1.5
+python-docx==1.2.0
+Pillow==12.2.0

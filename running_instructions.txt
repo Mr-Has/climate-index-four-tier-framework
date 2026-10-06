@@ -1,0 +1,344 @@
+Climate index four-tier framework
+Version 1.0.0
+
+This working copy was prepared for MH-Review2 on 6 October 2026. It contains
+scripts, the unchanged archived workbook and comparison CSVs. Saved figure
+images, standalone Word tables, manuscripts and previous logbooks were not
+copied. Output paths below show what the scripts generate when run.
+
+Table captions and explanatory notes now follow the reviewed paper, including
+the corrected methods references and the S1/S2 notes. Standalone Tables 1, 2
+and 6 retain their full source references. Calculation modules are unchanged
+from MH-Work12. A separate OLR coverage-sensitivity routine now reproduces
+the reviewed comparison. Figure descriptions and plotted-label definitions
+have passed a file-based comparison with the reviewed captions; all 20
+embedded images match the MH-Work12 PNGs exactly. This does not verify a new
+render or final page layout. On 6 October 2026, the current-package numerical
+check passed for all 27 archived CSVs and the separate OLR sensitivity routine.
+Python 3.12.1 and all eight pinned dependency versions were used. No source or
+saved result changed. This was an execution in the existing local environment,
+not a fresh dependency installation or a regeneration of figure/table files.
+Numerical checks apply to this archived input and the documented environment.
+Final manuscript layout review is separate from this code and data release.
+
+Repository: https://github.com/Mr-Has/climate-index-four-tier-framework
+Version: https://github.com/Mr-Has/climate-index-four-tier-framework/tree/v1.0.0
+Release date: 6 October 2026
+
+PDO normalization and the Nino 1+2 anomaly reference period remain unverified.
+Retain the paper's qualifications; do not treat source-file labels as an
+independent confirmation or silently substitute a newer provider snapshot.
+
+Reproducing the figures and tables
+
+This folder contains the code and archived data for Figures 1-8 and S1-S12,
+and Tables 1-6 and S1-S22 in the MH manuscript. Every numbered output has a
+matching Python script in its output directory. For example:
+
+Figures/generate_figure_05_climate_index_correlations.py
+Figures/figure_05_climate_index_correlations.png
+Figures/figure_05_climate_index_correlations.pdf
+
+Tables/generate_table_s20_el_nino_winter_classification.py
+Tables/table_s20_el_nino_winter_classification.docx
+
+Keep Code, Data, Figures and Tables together when copying the project.
+Paths are resolved from the scripts, so they also run from another directory.
+The source workbook and manuscripts are never overwritten by these scripts.
+
+Installation
+
+The calculations were checked with Python 3.12 and the package versions in
+requirements.txt. From Reproducibility, create a separate environment and install:
+
+  python -m venv .venv
+  .venv\Scripts\python -m pip install -r requirements.txt
+
+On macOS or Linux, use .venv/bin/python instead of .venv\Scripts\python.
+Microsoft Word and Excel are not required to generate the files. A compatible
+Word viewer is needed to inspect DOCX layout. Font and software differences
+can affect appearance; the numerical checks are independent of rendering.
+
+Run one output
+
+  .venv\Scripts\python Figures/generate_figure_05_climate_index_correlations.py
+  .venv\Scripts\python Tables/generate_table_s20_el_nino_winter_classification.py
+
+These commands replace only the named derived figure pair or table document.
+Close that output in Word or a PDF viewer before replacing it.
+To keep the saved outputs, add --output-dir followed by a separate folder:
+
+  .venv\Scripts\python Code/reproduce.py --figure 5 --output-dir ../Reproducibility-Rebuilt
+  .venv\Scripts\python Code/reproduce.py --table S20 --output-dir ../Reproducibility-Rebuilt
+
+The destination contains Figures and Tables subfolders. Numbers are case
+insensitive; 5, 05, S5 and s05 are accepted for their respective sequences.
+
+Run the complete study
+
+  .venv\Scripts\python Code/reproduce.py --all --check --export-data --output-dir ../Reproducibility-Rebuilt
+
+This produces 20 PNG/PDF figure pairs, 28 DOCX tables and 27 recalculated CSVs.
+The 28 numbered tables contain 38 physical tables because some have panels.
+The rebuilt tables retain the captions, notes, headings and cell contents;
+their standalone Word formatting is recreated and need not match the
+reviewed manuscript layout. The command does not insert outputs into the manuscript.
+
+Other commands
+
+  .venv\Scripts\python Code/reproduce.py --list
+  .venv\Scripts\python Code/reproduce.py --check
+  .venv\Scripts\python Code/reproduce.py --help
+
+--list prints every numbered output and its script path.
+--check recalculates all 27 datasets and compares their shapes, labels and
+numeric values with Data/*.csv (absolute tolerance 1e-12, relative 1e-10).
+An error stops the check; successful completion reports that inputs are
+unchanged. --check alone does not create or replace any file.
+--export-data writes recalculated CSVs only to a separate output directory.
+Assertions are part of the numerical checks; do not run Python with -O.
+
+OLR daily-coverage sensitivity (Supplementary Section S1.2)
+
+  .venv\Scripts\python Code/olr_coverage_sensitivity.py
+  .venv\Scripts\python Code/olr_coverage_sensitivity.py --export
+
+The first command recalculates and checks the comparison without writing files.
+The second also saves these derived comparisons in Sensitivity:
+  olr_winter_daily_coverage.csv                 44 winters and daily counts
+  olr_coverage_trend_family_comparison.csv      44 family/specification rows
+
+The routine identifies incomplete winters from the daily workbook observations;
+1984, 1985 and 1986 are excluded only in the OLR sensitivity. No values are filled
+or changed. Winter means keep equal monthly weights. Slopes use actual years;
+lag-one residual pairs must be one calendar year apart. No pre-whitening is
+triggered for these retained samples. The code stops if that screening outcome
+changes, because a gap-aware filtering method would require separate review.
+The two original eleven-index trend families are recalculated, replacing only
+the OLR probability before Benjamini-Hochberg adjustment. The original 27 CSVs
+are preserved. Sensitivity CSV slopes use each index's native units per decade
+(Table 2); OLR uses watts per square metre per decade. Extra lag-pair/threshold
+fields apply only to the complete-coverage OLR rows; blanks elsewhere do not
+represent missing input observations. Sen intervals are conventional intervals,
+not corrected for serial dependence. The comparison does not establish unbiased
+missingness or a zero trend.
+
+This separate command is not invoked by Code/reproduce.py --all or --check.
+Run it as well when checking all findings in the current reviewed paper.
+
+Data and methods
+
+Data/Climate_Indices_Data.xlsx is the fixed input archive. Its Monthly,
+Weekly_SST and Daily_OLR_ElNino sheets supply observations; Metadata supplies
+inventory checks, and DJF_seasonal supplies an independent aggregation check.
+No online download is needed after installing the packages. The product links
+and source qualifications below supplement the workbook metadata and Table 2.
+
+The code verifies this workbook version using SHA-256:
+f5223da118589c1723347173f4563b4f1966cd0ab945cf50b934900d13dfcda6
+
+This reproduces the manuscript's archived data, not the latest provider files.
+Do not substitute updated observations without reviewing the periods, source
+definitions, manuscript claims and expected results. The saved CSVs are used
+as comparison results by --check, not as the source of numerical table cells.
+
+Weekly and daily observations are grouped by their timestamp month. Winter
+means give equal weight to December, January and February and require all
+three monthly values. The winter label is the January year. Shared-index
+analyses use 40 winters, 1983-2022. Individual-record trend lengths differ;
+the El Nino classification uses 45 winters, 1982-2026. No gaps are filled.
+
+Figure 1 evaluates the Alduchov-Eskridge liquid-water saturation equation; it
+is a theoretical illustration. Tables 1 and 6 are literature-based summaries
+with their references included. Their wording is stored in table_definitions.py.
+Table 2 combines calculated record coverage with the documented index names
+and units. All other table rows are calculated from the workbook.
+
+Statistical choices, including the comparison families, conditional
+pre-whitening, conventional Sen intervals, Newey-West lag choices, principal
+component signs and El Nino thresholds, follow the manuscript methods.
+The circular-block calculation uses 10,000 draws and fixed seeds. Rebuilding
+the results does not establish causal effects on Canadian river discharge.
+
+Source identity and citations
+
+The analysis input is the fixed workbook identified by the SHA-256 above.
+It is a compiled source snapshot, not a fresh download made for this package.
+Its README records retrieval as September 2026 without an exact day. The paper
+cites provider webpages retrieved on 24 September 2026. That bibliographic date
+must not be presented as independently verified acquisition of every workbook
+series. Product documentation was checked again on 6 October 2026; that is a
+review date, not a replacement date for the observations. Current webpages may
+show different update dates and do not identify the workbook's exact version.
+
+Product links and attribution
+
+AO - Arctic Oscillation; monthly, dimensionless; NOAA Climate Prediction Center
+  https://stateoftheocean.osmc.noaa.gov/atm/ao.php
+NAO - North Atlantic Oscillation; monthly, dimensionless; NOAA Climate Prediction Center
+  https://stateoftheocean.osmc.noaa.gov/atm/nao.php
+PNA - Pacific-North American pattern; monthly, dimensionless; NOAA Climate Prediction Center
+  https://stateoftheocean.osmc.noaa.gov/atm/pna.php
+SOI - Southern Oscillation Index; monthly, dimensionless; NOAA Climate Prediction Center
+  https://stateoftheocean.osmc.noaa.gov/atm/soi.php
+PDO - Pacific Decadal Oscillation; monthly, provider index scale; portal attribution
+  to University of Washington/Nate Mantua via NOAA/ESRL
+  https://stateoftheocean.osmc.noaa.gov/atm/pdo.php
+AMO - Atlantic Multidecadal Oscillation; monthly, degrees Celsius; unsmoothed,
+  provider-detrended NOAA Physical Sciences Laboratory series
+  https://stateoftheocean.osmc.noaa.gov/atm/amo.php
+  https://psl.noaa.gov/data/timeseries/AMO/
+  https://psl.noaa.gov/data/correlation/amon.us.data
+NINO12 - Nino 1+2 SST anomaly; weekly, degrees Celsius
+  https://stateoftheocean.osmc.noaa.gov/sur/pac/nino12.php
+NINO3 - Nino 3 SST anomaly; weekly, degrees Celsius
+  https://stateoftheocean.osmc.noaa.gov/sur/pac/nino3.php
+NINO34 - Nino 3.4 SST anomaly; weekly, degrees Celsius
+  https://stateoftheocean.osmc.noaa.gov/sur/pac/nino34.php
+NINO4 - Nino 4 SST anomaly; weekly, degrees Celsius
+  https://stateoftheocean.osmc.noaa.gov/sur/pac/nino4.php
+TNA - Tropical North Atlantic SST anomaly; weekly, degrees Celsius
+  https://stateoftheocean.osmc.noaa.gov/sur/atl/tna.php
+OLREN - El Nino outgoing longwave radiation anomaly; daily, watts per square metre;
+  NOAA OLR Daily Climate Data Record via the University of Maryland OLR portal
+  https://stateoftheocean.osmc.noaa.gov/atm/enolr.php
+
+The five regional SST series are distributed by the State of the Ocean Climate
+portal using Reynolds OIv2 SST through NOAA/ESRL. These links identify the
+products and their documentation; a current download is not guaranteed to
+reproduce the archived workbook. The AO and portal AMO detail pages returned
+HTTP 503 during this review; their links were confirmed in the portal index.
+The NOAA PSL AMO page and the other product detail pages above were accessible.
+No new provider series was substituted or exhaustively value-checked today.
+
+Metadata qualifications
+
+AMO is in degrees Celsius and is already detrended. The earlier archived-source
+comparison matched 901 workbook months to the unsmoothed PSL short series.
+The workbook's 'standardized' metadata label is not adopted for AMO. The PSL
+page identifies the Kaplan-based series and its endpoint in January 2023;
+do not replace it with an ERSST-based or global-mean-adjusted alternative.
+
+PDO remains on the provider's scale. Its archived variable does not establish
+units or a normalization period. The portal's plotted standard-deviation
+reference period does not resolve normalization. The workbook's 'standardized'
+label alone is insufficient to assign unit variance or a fixed baseline.
+
+Nino 3, Nino 3.4, Nino 4 and TNA use the documented 1991-2020 anomaly reference.
+For Nino 1+2, the archived variable/workbook labels say 1982-2020 whereas the
+provider page says 1991-2020. Its reference period remains unconfirmed. It is
+retained only in the specified trend families, not the joint eight-index
+analysis or event classification. Do not relabel or rebase the observations.
+
+The workbook also retains Annual and Annual_OLR_LaNina sheets. Those annual
+series are not inputs to these winter calculations. Its general list of
+originating centres is not evidence that an NSIDC product was analysed here.
+Daily OLR values retain missing observations; the separate sensitivity routine
+documents their effect on the specified winter trend comparison. The provider
+OLR page's displayed update date is not used as the archived record endpoint.
+Coverage in Data/climate_index_inventory.csv is calculated from the workbook.
+
+Relationship to archived source comparisons
+
+The netCDF and PSL text files used in earlier source checks are comparison
+archives, not additional independent observations or replacement analysis
+inputs. They are not required by this package and have not been copied here.
+Earlier checks found a weekly SST difference on 23 August 2026 between the
+workbook and later comparison files; it is outside the analysed winters.
+The Nino 1+2 winter agreement was rechecked during this review. Those checks
+confirm value correspondence over the stated periods, not an independently
+verified climatology or the correctness of every upstream observation.
+
+Citations used in the reviewed paper
+
+National Oceanic and Atmospheric Administration. (n.d.-a). AMO (Atlantic
+Multidecadal Oscillation) index. Physical Sciences Laboratory. Retrieved
+September 24, 2026, from https://psl.noaa.gov/data/timeseries/AMO/
+
+National Oceanic and Atmospheric Administration. (n.d.-b). State of the ocean
+climate. Retrieved September 24, 2026, from
+https://stateoftheocean.osmc.noaa.gov/
+
+These are the paper's existing provider citations, with their existing retrieval
+dates. The suffixes distinguish the two undated sources within that reference
+list. Retain both the originating product attribution and the access portal;
+these provider citations do not replace the paper's methodological references.
+The original Python code in Code, Figures and Tables is licensed under MIT
+(see LICENSE.txt). The MIT grant applies to that project code, not to NOAA or
+other third-party observations in Data or their underlying source products.
+Retain the originating product citations and applicable source terms when
+redistributing data. No new license is asserted over third-party data.
+
+For reproducibility, cite version v1.0.0 of this repository alongside the
+climate-index source references and the associated paper. The repository
+version URL identifies the released code and archived input; it is not a DOI
+or a claim that the associated paper has been published.
+
+Where to inspect the calculations
+
+Code/reproduce.py                 Number-to-function dispatch and output paths
+Code/study_results.py             Shared results and archive comparisons
+Code/winter_aggregation.py        Monthly and winter means, standardization
+Code/inventory.py                 Data coverage and missing observations
+Code/olr_coverage_sensitivity.py   Separate complete-daily-coverage comparison
+Code/trend_analysis.py            Trends, period comparisons and uncertainty
+Code/index_dependence.py          Correlations, components and partial regression
+Code/el_nino.py                   Winter classification and exact inference
+Code/thermodynamics.py            Saturation pressure and temperature sensitivity
+Code/table_results.py             Numerical rows for each numbered table
+Code/table_definitions.py         Captions, headings, notes and literature text
+Code/table_writer.py              Word table formatting
+
+The remaining *_figures.py modules and winter_diagnostics.py contain plotting
+functions for the related output groups. Each entry point calls the shared
+code, so a method is maintained in one place. The numbered list below provides
+the exact script to run for each output.
+
+Figures/generate_figure_01_thermodynamic_basis.py
+Figures/generate_figure_02_winter_atmospheric_circulation.py
+Figures/generate_figure_03_sst_trends_by_study_period.py
+Figures/generate_figure_04_atlantic_pacific_contrasts_and_variability.py
+Figures/generate_figure_05_climate_index_correlations.py
+Figures/generate_figure_06_principal_component_variance.py
+Figures/generate_figure_07_soi_pna_partial_relationship.py
+Figures/generate_figure_08_el_nino_winter_classification.py
+Figures/generate_figure_s01_climate_index_data_availability.py
+Figures/generate_figure_s02_standardized_winter_time_series.py
+Figures/generate_figure_s03_winter_climate_index_distributions.py
+Figures/generate_figure_s04_winter_climate_index_autocorrelation.py
+Figures/generate_figure_s05_winter_circulation_period_comparison.py
+Figures/generate_figure_s06_winter_trend_period_sensitivity.py
+Figures/generate_figure_s07_tna_nino34_winter_anomalies.py
+Figures/generate_figure_s08_winter_index_variance_inflation.py
+Figures/generate_figure_s09_strongest_winter_index_correlations.py
+Figures/generate_figure_s10_winter_correlations_after_detrending.py
+Figures/generate_figure_s11_winter_correlation_omission_sensitivity.py
+Figures/generate_figure_s12_el_nino_classification_sensitivity.py
+Tables/generate_table_01_flood_generating_mechanisms.py
+Tables/generate_table_02_climate_index_inventory.py
+Tables/generate_table_03_winter_climate_index_trends.py
+Tables/generate_table_04_winter_circulation_period_means.py
+Tables/generate_table_05_winter_index_dependence_and_components.py
+Tables/generate_table_06_hydrological_observations_and_checks.py
+Tables/generate_table_s01_monthly_data_coverage.py
+Tables/generate_table_s02_winter_index_distributions.py
+Tables/generate_table_s03_winter_trends_individual_records.py
+Tables/generate_table_s04_winter_trends_common_period.py
+Tables/generate_table_s05_winter_trend_period_sensitivity.py
+Tables/generate_table_s06_winter_period_mean_comparisons.py
+Tables/generate_table_s07_winter_period_difference_uncertainty.py
+Tables/generate_table_s08_atlantic_pacific_trend_contrasts.py
+Tables/generate_table_s09_nino34_winter_variability.py
+Tables/generate_table_s10_winter_index_correlations.py
+Tables/generate_table_s11_winter_index_autocorrelations.py
+Tables/generate_table_s12_winter_correlation_detrending.py
+Tables/generate_table_s13_winter_correlation_omission_sensitivity.py
+Tables/generate_table_s14_winter_index_variance_inflation.py
+Tables/generate_table_s15_winter_principal_component_variance.py
+Tables/generate_table_s16_winter_principal_component_weights.py
+Tables/generate_table_s17_winter_index_represented_variance.py
+Tables/generate_table_s18_winter_partial_correlations.py
+Tables/generate_table_s19_winter_partial_regression_uncertainty.py
+Tables/generate_table_s20_el_nino_winter_classification.py
+Tables/generate_table_s21_el_nino_classification_sensitivity.py
+Tables/generate_table_s22_el_nino_warm_runs.py

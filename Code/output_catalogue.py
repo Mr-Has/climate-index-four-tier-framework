@@ -1,0 +1,22 @@
+"""Numbered manuscript outputs and their filenames."""
+
+FIGURES = {'figure_01': 'figure_01_thermodynamic_basis',
+ 'figure_02': 'figure_02_winter_atmospheric_circulation',
+ 'figure_03': 'figure_03_sst_trends_by_study_period',
+ 'figure_04': 'figure_04_atlantic_pacific_contrasts_and_variability',
+ 'figure_05': 'figure_05_climate_index_correlations',
+ 'figure_06': 'figure_06_principal_component_variance',
+ 'figure_07': 'figure_07_soi_pna_partial_relationship',
+ 'figure_08': 'figure_08_el_nino_winter_classification',
+ 'figure_s01': 'figure_s01_climate_index_data_availability',
+ 'figure_s02': 'figure_s02_standardized_winter_time_series',
+ 'figure_s03': 'figure_s03_winter_climate_index_distributions',
+ 'figure_s04': 'figure_s04_winter_climate_index_autocorrelation',
+ 'figure_s05': 'figure_s05_winter_circulation_period_comparison',
+ 'figure_s06': 'figure_s06_winter_trend_period_sensitivity',
+ 'figure_s07': 'figure_s07_tna_nino34_winter_anomalies',
+ 'figure_s08': 'figure_s08_winter_index_variance_inflation',
+ 'figure_s09': 'figure_s09_strongest_winter_index_correlations',
+ 'figure_s10': 'figure_s10_winter_correlations_after_detrending',
+ 'figure_s11': 'figure_s11_winter_correlation_omission_sensitivity',
+ 'figure_s12': 'figure_s12_el_nino_classification_sensitivity'}

@@ -1,0 +1,13 @@
+﻿index,full_name,native_cadence,first_valid_date,last_valid_date,valid_native_observations,missing_native_in_archive,missing_native_within_valid_span,first_numeric_month,last_numeric_month,available_months,missing_months_within_record,complete_calendar_years
+AO,Arctic Oscillation,monthly,1950-01-15,2026-08-15,920,0,0,1950-01,2026-08,920,0,76
+NAO,North Atlantic Oscillation,monthly,1950-01-15,2026-08-15,920,0,0,1950-01,2026-08,920,0,76
+PNA,Pacific–North American pattern,monthly,1950-01-15,2026-08-15,920,0,0,1950-01,2026-08,920,0,76
+SOI,Southern Oscillation Index,monthly,1951-01-15,2026-07-15,907,36,0,1951-01,2026-07,907,0,75
+PDO,Pacific Decadal Oscillation,monthly,1854-01-15,2026-07-15,2071,0,0,1854-01,2026-07,2071,0,172
+AMO,Atlantic Multidecadal Oscillation,monthly,1948-01-15,2023-01-15,901,0,0,1948-01,2023-01,901,0,75
+NINO12,Niño 1+2 temperature anomaly,weekly,1981-09-06,2026-08-30,2348,0,0,1981-09,2026-08,540,0,44
+NINO3,Niño 3 temperature anomaly,weekly,1981-09-06,2026-08-30,2348,0,0,1981-09,2026-08,540,0,44
+NINO34,Niño 3.4 temperature anomaly,weekly,1981-09-06,2026-08-30,2348,0,0,1981-09,2026-08,540,0,44
+NINO4,Niño 4 temperature anomaly,weekly,1981-09-06,2026-08-30,2348,0,0,1981-09,2026-08,540,0,44
+TNA,Tropical North Atlantic temperature anomaly,weekly,1981-09-06,2026-08-30,2348,0,0,1981-09,2026-08,540,0,44
+OLREN,El Niño outgoing longwave radiation index,daily,1982-01-16,2026-08-20,16099,219,189,1982-01,2026-08,536,0,44

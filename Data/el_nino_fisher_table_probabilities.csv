@@ -1,0 +1,7 @@
+﻿later_central,later_eastern,earlier_central,earlier_eastern,probability,probability_fraction,included_in_two_sided_p
+1,5,6,0,0.007575757575757576,1/132,True
+2,4,5,1,0.11363636363636363,5/44,True
+3,3,4,2,0.37878787878787878,25/66,False
+4,2,3,3,0.37878787878787878,25/66,False
+5,1,2,4,0.11363636363636363,5/44,True
+6,0,1,5,0.007575757575757576,1/132,True
